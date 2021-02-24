@@ -91,6 +91,7 @@ export default {
   font-size: 40px;
   font-family: 'Oswald', sans-serif;
   text-align: left;
+  color: rgba(59, 59, 59, 1);
 }
 
 .table-container {
@@ -142,7 +143,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  background-color:  rgba(59, 59, 59, 1);;
+  background-color:  rgba(59, 59, 59, 1);
 }
 
 .legend-container p {
