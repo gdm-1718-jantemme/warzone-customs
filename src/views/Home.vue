@@ -151,4 +151,16 @@ export default {
   text-align: left;
   color: white;
 }
+
+@media only screen and (max-width: 700px) {
+  .table-container {
+    width: 95%;
+  }
+
+  .legend-container p {
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
 </style>
