@@ -38,7 +38,7 @@
 
           <div>
             <label for="example-datepicker">Kies een datum en de starttijd</label>
-            <b-form-datepicker id="example-datepicker" v-model="form.date" class="mb-2"></b-form-datepicker>
+            <b-form-datepicker id="example-datepicker" v-model="form.date" :min="new Date()" locale="nl" class="mb-2"></b-form-datepicker>
           </div>
 
           <div>

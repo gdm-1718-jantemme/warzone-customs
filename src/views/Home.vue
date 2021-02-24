@@ -116,6 +116,10 @@ export default {
   align-self: flex-start;
 }
 
+.date {
+  margin-top: 10px !important;
+}
+
 .divider {
   width: 100%;
   height: 1px;
@@ -134,7 +138,7 @@ export default {
   text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .legend-container {
