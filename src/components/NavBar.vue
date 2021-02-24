@@ -2,7 +2,7 @@
   <div class="custom-navbar">
     <div class="margin-container">
       <h2> WARZONE CUSTOMS</h2>
-      <div>
+      <div class="links-container">
         <router-link class="nav-item" to="/">Upcoming</router-link>
         <router-link class="nav-item" to="/add">+ Add</router-link>
       </div>
@@ -40,5 +40,21 @@ h2 {
 
 .nav-item:hover {
   color: lightgray;
+}
+
+@media only screen and (max-width: 700px) {
+  .margin-container {
+    width: 90%;
+  }
+
+  .margin-container h2{
+    text-align: left;
+    width: 50%;
+  }
+
+  .links-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
