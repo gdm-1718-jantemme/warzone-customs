@@ -5,6 +5,7 @@
       <div class="links-container">
         <router-link class="nav-item" to="/">Upcoming</router-link>
         <router-link class="nav-item" to="/add">+ Add</router-link>
+        <router-link class="nav-item" to="/calendar">Kalender</router-link>
       </div>
     </div>
   </div>

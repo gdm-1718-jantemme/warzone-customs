@@ -85,6 +85,7 @@ export default {
         streamLink: this.form.streamLink,
         date: this.form.date,
         time: this.form.time,
+        title: this.form.name + "'s game"
       })
       .then(() => {
         setTimeout(() => {

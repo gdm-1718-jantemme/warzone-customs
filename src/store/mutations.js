@@ -12,7 +12,7 @@ export default {
       let lobbies = snapshot.docs.map(doc => doc.data())
 
       lobbies  = lobbies.filter(filterByDate)
-
+      console.log(lobbies)
       state.lobbies = lobbies.sort(function(a,b){
         if (a.date === b.date) return a.time.localeCompare(b.time);
         else return  new Date(a.date) - new Date(b.date);
