@@ -102,7 +102,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .button-submit {
   margin-top: 20px;
   height: 40px;

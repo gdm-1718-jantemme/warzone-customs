@@ -86,7 +86,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .title {
   font-size: 40px;
   font-family: 'Oswald', sans-serif;

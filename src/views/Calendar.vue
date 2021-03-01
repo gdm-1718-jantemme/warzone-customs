@@ -67,25 +67,45 @@ export default {
   computed: {
     ...mapState(['lobbies'])
   },
-  mounted: function() {
+  mounted() {
     this.loadLobbies()
+    this.onDocumentClick()
+    
+    const links = document.getElementsByTagName('a')
+    links.forEach((link, index) => {
+      if (index > 2) link.style.color = 'black'
+    });
   },
+  updated() {
+    const links = document.getElementsByTagName('a')
+    links.forEach((link, index) => {
+      if (index > 2) link.style.color = 'black'
+    });
+  },
+  // TODO: remove event listener
   methods: {
     ...mapActions(['loadLobbies']),
-    onClick: function(e) {
+    onClick(e) {
       this.isEventModalVisible = true
-      console.log(e.event._def.extendedProps)
       this.currentEvent.title = e.event._def.title
       this.currentEvent.name = e.event._def.extendedProps.name
       this.currentEvent.signUpLink = e.event._def.extendedProps.signUpLink
       this.currentEvent.streamLink = e.event._def.extendedProps.streamLink
       this.currentEvent.time = e.event._def.extendedProps.time
     },
-    toggleModal: function() {
+    toggleModal() {
       if(this.isEventModalVisible)
         this.isEventModalVisible = false
       else this.isEventModalVisible = true
     },
+    onDocumentClick() {
+      let _this = this
+      document.addEventListener('click', (event) => {
+        if (event.target.id == 'modal') {
+          _this.isEventModalVisible = false
+        }
+      });
+    }
   },
   components: {
     NavBar,
@@ -94,12 +114,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .calendar-container {
   width: 70%;
   margin: 0 auto;
-  background-color: darkgray;
   padding: 10px;
+}
+.fc-daygrid-day-number{
+  color: black !important;
 }
 .event-modal {
   position: fixed;

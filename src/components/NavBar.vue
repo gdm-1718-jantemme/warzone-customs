@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 h2 {
   color: white;
   margin: 0 !important;
