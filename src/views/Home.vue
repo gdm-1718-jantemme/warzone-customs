@@ -2,36 +2,6 @@
   <div>
     <NavBar/>
     <div class="table-container">
-      <!--<b-table striped hover :items="lobbies">
-        <template #cell(streamLink)="data">
-            <a :href="data.value"> {{ data.value }}</a>
-        </template>
-        <template #cell(signUpLink)="data">
-            <a :href="data.value"> {{ data.value }}</a>
-        </template>
-      </b-table>-->
-
-      <!--<b-table-simple hover small caption-top responsive>
-        <b-thead head-variant="dark">
-          <b-tr>
-            <b-th>Date</b-th>
-            <b-th>Organiser</b-th>
-            <b-th>Time</b-th>
-            <b-th>Stream Link</b-th>
-            <b-th>Sign Up</b-th>
-          </b-tr>
-        </b-thead>
-        <b-tbody>
-          <b-tr v-for="(lobby) in lobbies" :key="lobby.index">
-            <b-th>{{ lobby.date }}</b-th>
-            <b-th class="text-right">{{ lobby.name }}</b-th>
-            <b-td>{{ lobby.time }}</b-td>
-            <b-td>{{ lobby.streamLink }}</b-td>
-            <b-td>{{ lobby.signUpLink }}</b-td>
-          </b-tr>
-        </b-tbody>
-      </b-table-simple>-->
-
       <h1 class="title">GEPLANDE GAMES: </h1>
       <div class="divider"/>
       <div class="table-row" v-for="(lobby, index) in lobbies" :key="index">
@@ -47,8 +17,8 @@
         <div class="row-container">
           <p>{{ lobby.name }}</p>
           <p>{{ lobby.time }}</p>
-          <p><a :href="lobby.signUpLink">{{ lobby.signUpLink }}</a></p>
-          <p><a :href="lobby.streamLink">{{ lobby.streamLink }}</a></p>
+          <p><a :href="checkUrl(lobby.signUpLink)">{{ lobby.signUpLink }}</a></p>
+          <p><a :href="checkUrl(lobby.streamLink)">{{ lobby.streamLink }}</a></p>
         </div>
       </div>
     </div>
@@ -58,6 +28,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 
+import { checkUrl } from '@/utils/functions'
 import NavBar from '@/components/NavBar'
 
 export default {
@@ -71,12 +42,13 @@ export default {
   components: {
     NavBar
   },
-  mounted() {
-    this.loadLobbies()
+  created() {
+    if(!this.lobbies.length) this.loadLobbies()
   },
   methods: {
     ...mapActions(['loadLobbies']),
-    shouldRenderDate: function(lobby, index) {
+    checkUrl,
+    shouldRenderDate(lobby, index) {
       if(this.lobbies[index - 1])
         if(lobby.date !== this.lobbies[index - 1].date) return true
         else return false

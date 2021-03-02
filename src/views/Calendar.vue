@@ -22,10 +22,10 @@
             <p>{{ currentEvent.name }}</p>
             <p>{{ currentEvent.time }}</p>
             <p>
-              <a :href="currentEvent.signUpLink">{{ currentEvent.signUpLink }}</a>
+              <a :href="checkUrl(currentEvent.signUpLink)">{{ currentEvent.signUpLink }}</a>
             </p>
             <p>
-              <a :href="currentEvent.streamLink">{{ currentEvent.streamLink }}</a>
+              <a :href="checkUrl(currentEvent.streamLink)">{{ currentEvent.streamLink }}</a>
             </p>
           </div>
         </div>
@@ -41,6 +41,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { mapState, mapActions } from 'vuex'
 
 import NavBar from '@/components/NavBar'
+import { checkUrl } from '@/utils/functions'
 
 export default {
   data() {
@@ -67,8 +68,10 @@ export default {
   computed: {
     ...mapState(['lobbies'])
   },
+  created() {
+    if (!this.lobbies.length) this.loadLobbies()
+  },
   mounted() {
-    this.loadLobbies()
     this.onDocumentClick()
     
     const links = document.getElementsByTagName('a')
@@ -85,6 +88,7 @@ export default {
   // TODO: remove event listener
   methods: {
     ...mapActions(['loadLobbies']),
+    checkUrl,
     onClick(e) {
       this.isEventModalVisible = true
       this.currentEvent.title = e.event._def.title
