@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 
 import { checkUrl } from '@/utils/functions'
 import NavBar from '@/components/NavBar'
@@ -37,16 +36,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lobbies'])
+    lobbies() {
+      return this.$store.getters.getUpcomingEvents
+    }
   },
   components: {
     NavBar
   },
-  created() {
-    if(!this.lobbies.length) this.loadLobbies()
-  },
   methods: {
-    ...mapActions(['loadLobbies']),
     checkUrl,
     shouldRenderDate(lobby, index) {
       if(this.lobbies[index - 1])

@@ -1,7 +1,6 @@
 <template>
   <div>
     <NavBar/>
-
     <b-container>
       <div class="form-container">
         <b-form @submit.prevent="onSubmit" v-if="true">
@@ -79,7 +78,9 @@ export default {
   methods: {
     onSubmit() {
       this.isLoading = true
-      db.collection('lobbies').doc().set({
+      const newDocument = db.collection('lobbies').doc()
+      newDocument.set({
+        id: newDocument.id,
         name: this.form.name,
         signUpLink: this.form.signUpLink,
         streamLink: this.form.streamLink,

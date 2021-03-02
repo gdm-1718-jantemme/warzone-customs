@@ -5,9 +5,17 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex"
 
 export default {
   name: 'App',
+  computed: {
+    ...mapState(['lobbies'])
+  },
+  created() {
+    if(!this.lobbies.length) this.loadLobbies()
+  },
+  methods: mapActions(['loadLobbies'])
 }
 </script>
 

@@ -38,7 +38,6 @@
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { mapState, mapActions } from 'vuex'
 
 import NavBar from '@/components/NavBar'
 import { checkUrl } from '@/utils/functions'
@@ -66,36 +65,19 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lobbies'])
-  },
-  created() {
-    if (!this.lobbies.length) this.loadLobbies()
+    lobbies() {
+      return this.$store.getters.getUpcomingEvents
+    }
   },
   mounted() {
     this.onDocumentClick()
-    
-    const links = document.getElementsByTagName('a')
-    links.forEach((link, index) => {
-      if (index > 2) link.style.color = 'black'
-    });
-  },
-  updated() {
-    const links = document.getElementsByTagName('a')
-    links.forEach((link, index) => {
-      if (index > 2) link.style.color = 'black'
-    });
   },
   // TODO: remove event listener
   methods: {
-    ...mapActions(['loadLobbies']),
     checkUrl,
     onClick(e) {
       this.isEventModalVisible = true
-      this.currentEvent.title = e.event._def.title
-      this.currentEvent.name = e.event._def.extendedProps.name
-      this.currentEvent.signUpLink = e.event._def.extendedProps.signUpLink
-      this.currentEvent.streamLink = e.event._def.extendedProps.streamLink
-      this.currentEvent.time = e.event._def.extendedProps.time
+      this.currentEvent = { title: e.event._def.title, ...e.event._def.extendedProps }
     },
     toggleModal() {
       if(this.isEventModalVisible)
@@ -118,14 +100,27 @@ export default {
 }
 </script>
 
+<style>
+.fc-col-header-cell-cushion {
+  color: rgb(59, 59, 59) !important
+}
+.fc-daygrid-day-number{
+  color: black;
+}
+.fc .fc-button-primary {
+  background-color: rgb(59, 59, 59);
+  border: none;
+}
+.fc .fc-button-primary:disabled {
+  background-color: rgba(59, 59, 59, 0.7);
+}
+</style>
+
 <style scoped>
 .calendar-container {
   width: 70%;
   margin: 0 auto;
   padding: 10px;
-}
-.fc-daygrid-day-number{
-  color: black !important;
 }
 .event-modal {
   position: fixed;
